@@ -4,7 +4,7 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  height: 10vmin;
   pointer-events: none;
 }
 
@@ -21,6 +21,11 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.onfido-container {
+  padding-top: 10px;
+  padding-bottom: 20px;
 }
 
 @keyframes App-logo-spin {
