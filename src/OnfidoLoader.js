@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-// FIXME
-// import { init } from 'onfido-sdk-ui';
-
-import * as Onfido from "onfido-sdk-ui/dist/onfido.min.js";
+import { init } from "onfido-sdk-ui";
 import "onfido-sdk-ui/dist/style.css";
 
 class OnfidoLoader extends Component {
@@ -19,7 +16,8 @@ class OnfidoLoader extends Component {
 
     componentDidMount() {
         getJwtToken().then(jwtToken => {
-            this.initializeSdk(jwtToken);
+            this.setState({ jwtToken })
+            this.initializeSdk();
         }, reason => {
             this.setState({
                 error: reason.statusText
@@ -42,11 +40,11 @@ class OnfidoLoader extends Component {
         );
     }
 
-    initializeSdk = (jwtToken) => {
-        if (Onfido && jwtToken) {
-            const onfidoSdk = Onfido.init({
+    initializeSdk = () => {
+        if (this.state.jwtToken) {
+            const defaultConfig = {
                 useModal: false,
-                token: jwtToken,
+                token: this.state.jwtToken,
                 onComplete: (data) => {
                     // callback for when everything is complete
                     console.log("Everything is complete", data);
@@ -54,25 +52,25 @@ class OnfidoLoader extends Component {
                 steps: [
                 {
                     type:'welcome',
-                    options:{ title:'Open your new bank account' }
+                    options:{ title: 'Open your new bank account' }
                 },
                     'document',
                     'face',
                     'complete'
                 ]
-            });
-            this.setState({
-                onfidoSdk,
-                jwtToken
-            });
+            }
+            const onfidoSdk = init(defaultConfig);
+            this.setState({ onfidoSdk });
         } else {
-            return <div>Unable to initialize Onfido SDK</div>
+            return <div class="App-error">Error: Unable to initialize Onfido SDK</div>
         }
     }
 
 }
 
 const getJwtToken = () => {
+    // NOTE: SDK token factory is an internal service
+    //       all photos uploaded using a token factory JWT will end up in a dummy client account
     const url = "https://token-factory.onfido.com/sdk_token";
     const request = new XMLHttpRequest();
     return new Promise((resolve, reject) => {
