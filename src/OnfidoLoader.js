@@ -77,13 +77,13 @@ const getJwtToken = () => {
     const request = new XMLHttpRequest();
     return new Promise((resolve, reject) => {
         request.onreadystatechange = () => {
-			// Only run if the request is complete
-			if (request.readyState !== 4) {
+            // Only run if the request is complete
+            if (request.readyState !== 4) {
                 return;
             }
 
-            // Process the response
-			if (request.status >= 200 && request.status < 300) {
+                  // Process the response
+            if (request.status >= 200 && request.status < 300) {
                 // Success
                 try {
                     const data = JSON.parse(request.responseText);
@@ -94,16 +94,17 @@ const getJwtToken = () => {
                         statusText: "Failed to retrieve JWT token"
                     });
                 }
-			} else {
+            } else {
                 // Failed
-				reject({
-					status: request.status,
-					statusText: request.statusText
-				});
-			}
+                reject({
+                  status: request.status,
+                  statusText: request.statusText
+                });
+            }
         };
 
         request.open("GET", url, true);
+        request.setRequestHeader('Authorization', 'BASIC ' + process.env.REACT_APP_SDK_TOKEN_FACTORY_SECRET);
         request.send();
     });
 }
