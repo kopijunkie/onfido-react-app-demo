@@ -23,6 +23,12 @@
   color: #61dafb;
 }
 
+.App-error {
+  border: 1px solid #f00;
+  border-radius: 4px;
+  min-height: 2rem;
+}
+
 .onfido-container {
   padding-top: 10px;
   padding-bottom: 20px;
