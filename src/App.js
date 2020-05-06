@@ -4,15 +4,13 @@ import './App.css';
 
 import OnfidoLoader from './OnfidoLoader.js';
 
-function App() {
-  return (
+const App = () => (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <OnfidoLoader />
-      </header>
+        <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <OnfidoLoader />
+        </header>
     </div>
-  );
-}
+);
 
 export default App;
