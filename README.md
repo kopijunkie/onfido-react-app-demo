@@ -1,3 +1,5 @@
+Onfido SDK Sample React App
+
 A simple React app implementation of the [Onfido JS SDK](https://github.com/onfido/onfido-sdk-ui)
 
 ## Developing Locally
@@ -11,5 +13,6 @@ The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
 ## TODO
-* [ ] Flesh out with simple routing
+* [ ] Flesh out app a bit more with simple routing
 * [ ] Add language (ES, DE) options
+* [ ] Add region-based JWT options
