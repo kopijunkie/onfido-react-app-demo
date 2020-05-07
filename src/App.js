@@ -1,16 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
-import OnfidoLoader from './OnfidoLoader.js';
+import OnfidoLoader from "./OnfidoLoader.js";
 
-const App = () => (
-    <div className="App">
+class App extends Component {
+
+  render() {
+    return (
+      <div className="App">
         <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <OnfidoLoader />
+          <img src={logo} className="App-logo" alt="logo" />
+          <OnfidoLoader />
         </header>
-    </div>
-);
+      </div>
+    );
+  }
+
+}
 
 export default App;
