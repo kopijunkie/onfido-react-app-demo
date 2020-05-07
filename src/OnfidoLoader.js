@@ -44,7 +44,41 @@ class OnfidoLoader extends Component {
     }
 
     initializeSdk = () => {
-        const customConfig = null;
+        const customConfig = {
+          useModal: false,
+          token: this.state.jwt,
+          onComplete: (data) => {
+            if (process.env.REACT_APP_DEBUG_CONSOLE) {
+              console.log('DEBUG: SDK data at onComplete:',data);
+            }
+            this.props.updatePerson({
+              person: {
+                onfido_document_id_1: data.document_front.id,
+                onfido_document_id_2: data.document_back ? data.document_back.id : null,
+                ...this.props.person,
+              },
+            });
+          },
+          steps: [
+            {
+              type: 'welcome',
+              options: {
+                title: "Welcome",
+                descriptions: ["Sample"],
+              },
+            },
+            {
+              type: 'document',
+              options: {
+                documentTypes: {
+                  passport: true,
+                  driving_licence: this.props.locale === 'new-york',
+                },
+              },
+            },
+              'complete',
+            ],
+        };
         if (this.state.jwt) {
             const defaultConfig = {
                 useModal: false,
