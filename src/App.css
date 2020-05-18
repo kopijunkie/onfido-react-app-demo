@@ -19,6 +19,10 @@
   color: white;
 }
 
+.App-links {
+  list-style: none;
+}
+
 .App-link {
   color: #61dafb;
 }
