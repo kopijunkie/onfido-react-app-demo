@@ -34,14 +34,14 @@ class OnfidoLoader extends Component {
         }
     }
 
-    render() {
-        return (
-            <div className="onfido-container">
-                <div>{this.state.error}</div>
-                <div id="onfido-mount"></div>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="onfido-container">
+        {this.state.error && <div>{this.state.error}</div>}
+        <div id="onfido-mount"></div>
+      </div>
+    );
+  }
 
     initializeSdk = () => {
         const customConfig = null;
